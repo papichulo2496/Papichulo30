@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Papichulo turns 30 — You’re invited</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Pinyon+Script&display=swap">
+<style>
+:root{
+  --velvet:#0F3B2E;
+  --velvet-deep:#082119;
+  --brass:#C9A45C;
+  --brass-light:#EBD49B;
+  --brass-ink:#7A5C22;
+  --ivory:#F6EFE0;
+  --ivory-shade:#E8DCC2;
+  --ink:#1E2A24;
+  --ink-soft:#46524B;
+  --wax:#7A1F2B;
+  --wax-light:#A33343;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,"Times New Roman",serif;
+  --script:"Pinyon Script","Snell Roundhand","Apple Chancery",cursive;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --velvet:#0C3328; --velvet-deep:#061A14;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{ --velvet:#0C3328; --velvet-deep:#061A14; color-scheme: dark; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:var(--display);
+  color:var(--ivory);
+  background-color:var(--velvet-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 18%, rgba(255,255,255,.07), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48' viewBox='0 0 96 48'%3E%3Cg fill='none' stroke='%23C9A45C' stroke-opacity='.16' stroke-width='1'%3E%3Cpath d='M0 48a48 48 0 0 1 96 0'/%3E%3Cpath d='M12 48a36 36 0 0 1 72 0'/%3E%3Cpath d='M24 48a24 24 0 0 1 48 0'/%3E%3Cpath d='M36 48a12 12 0 0 1 24 0'/%3E%3Cpath d='M48 0v48M48 48L14 14M48 48L82 14'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(var(--velvet), var(--velvet-deep));
+  background-size:auto, 96px 48px, auto;
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+button,a,input,select{font:inherit}
+:focus-visible{outline:2px solid var(--brass-light);outline-offset:3px}
+
+/* ============ ENVELOPE STAGE ============ */
+.stage{
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:36px;padding:32px 20px;
+  transition:opacity .6s ease, transform .6s ease;
+}
+.stage.gone{opacity:0;transform:scale(.96);pointer-events:none}
+.stage-kicker{
+  margin:0;font-style:italic;font-size:18px;color:var(--brass-light);letter-spacing:.02em;text-align:center
+}
+.stage-kicker b{font-family:var(--script);font-style:normal;font-weight:400;font-size:34px;display:block;color:var(--brass-light);margin-top:4px}
+.envelope{
+  position:relative;width:min(88vw,440px);aspect-ratio:1.45/1;
+  perspective:1400px;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));
+}
+.env-back{
+  position:absolute;inset:0;border-radius:6px;
+  background:linear-gradient(180deg,#d9cba9,#cdbd98);
+}
+.env-lining{
+  position:absolute;inset:6px 6px 40%;
+  clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+  background:
+    repeating-linear-gradient(135deg, rgba(122,92,34,.35) 0 2px, transparent 2px 10px),
+    linear-gradient(var(--velvet),var(--velvet-deep));
+  border-radius:4px 4px 0 0;
+}
+.peek{
+  position:absolute;left:7%;right:7%;top:8%;height:84%;
+  background:var(--ivory);border-radius:3px;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:9%;
+  transition:transform .9s cubic-bezier(.2,.8,.2,1);
+  z-index:1;
+}
+.peek::before{content:"";position:absolute;inset:8px;border:1px solid var(--brass)}
+.peek span{font-family:var(--script);font-size:clamp(30px,8vw,44px);color:var(--brass-ink);position:relative}
+.peek small{font-style:italic;font-size:13px;color:var(--ink-soft);position:relative}
+.env-front{
+  position:absolute;inset:0;z-index:2;border-radius:6px;
+  background:
+    linear-gradient(160deg, rgba(255,255,255,.25), transparent 40%),
+    linear-gradient(180deg,#efe5cf,#e6d9bb);
+  clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);
+}
+.env-front::after{ /* side folds */
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(to top right, transparent 49.6%, rgba(122,92,34,.18) 50%, transparent 50.6%),
+    linear-gradient(to top left, transparent 49.6%, rgba(122,92,34,.18) 50%, transparent 50.6%);
+}
+.env-address{
+  position:absolute;z-index:3;left:0;right:0;bottom:12%;text-align:center;
+  font-style:italic;font-size:14px;color:var(--brass-ink);letter-spacing:.04em;
+}
+.env-flap{
+  position:absolute;left:0;right:0;top:0;height:60%;z-index:4;
+  transform-origin:50% 0;
+  transition:transform .8s cubic-bezier(.45,.05,.3,1);
+  transform-style:preserve-3d;
+}
+.env-flap::before{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,#f3ead6,#e2d4b4);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  border-radius:6px 6px 0 0;
+  backface-visibility:hidden;
+}
+.env-flap::after{
+  content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(135deg, rgba(201,164,92,.35) 0 2px, transparent 2px 10px),
+    var(--velvet);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform:rotateX(180deg);
+  backface-visibility:hidden;
+}
+.seal{
+  position:absolute;z-index:5;left:50%;top:60%;
+  width:92px;height:92px;margin:-46px 0 0 -46px;
+  border:0;padding:0;background:none;cursor:pointer;border-radius:50%;
+  transition:transform .35s ease, opacity .35s ease;
+  animation:pulse 2.4s ease-in-out infinite;
+}
+.seal:hover{transform:scale(1.05)}
+.seal svg{width:100%;height:100%;display:block;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.hint{margin:0;font-size:15px;font-style:italic;color:var(--brass-light);opacity:.9}
+
+.envelope.opening .seal{animation:none;transform:scale(1.25) rotate(-12deg);opacity:0}
+.envelope.flap-open .env-flap{transform:rotateX(180deg);z-index:0}
+.envelope.card-out .peek{transform:translateY(-62%)}
+
+/* ============ INVITATION ============ */
+.invite-wrap{
+  display:none;padding:40px 16px 64px;
+}
+.invite-wrap.shown{display:block;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.98)}to{opacity:1;transform:none}}
+
+.card{
+  position:relative;max-width:560px;margin:0 auto;
+  background-color:var(--ivory);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .25 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  color:var(--ink);
+  padding:22px;
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 40px 80px rgba(0,0,0,.5), 0 8px 18px rgba(0,0,0,.3);
+}
+.frame{
+  position:relative;border:1.5px solid var(--brass);
+  padding:56px clamp(20px,6vw,48px) 44px;text-align:center;
+}
+.frame::before{content:"";position:absolute;inset:6px;border:.75px solid var(--brass);pointer-events:none}
+.corner{position:absolute;width:58px;height:58px;color:var(--brass-ink)}
+.corner.tl{top:-1px;left:-1px}
+.corner.tr{top:-1px;right:-1px;transform:scaleX(-1)}
+.corner.bl{bottom:-1px;left:-1px;transform:scaleY(-1)}
+.corner.br{bottom:-1px;right:-1px;transform:scale(-1,-1)}
+
+.crest{display:block;width:180px;height:auto;margin:0 auto 22px;color:var(--brass-ink)}
+.lede{margin:0;font-style:italic;font-size:18px;line-height:1.55;color:var(--ink-soft)}
+.name{
+  margin:6px 0 2px;font-family:var(--script);font-weight:400;
+  font-size:clamp(64px,17vw,104px);line-height:1.15;
+  background:linear-gradient(100deg,#6b4e1a 0%,#a8823c 22%,#f1dca2 38%,#b38b40 52%,#6b4e1a 70%,#a8823c 100%);
+  background-size:250% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  padding:0 .15em;
+}
+.shown .name{animation:sheen 2.6s ease .6s both}
+@keyframes sheen{from{background-position:100% 0}to{background-position:0 0}}
+.sub{margin:0;font-size:19px;line-height:1.5;color:var(--ink)}
+
+.ornament{display:block;width:150px;height:18px;margin:30px auto;color:var(--brass)}
+
+.when-date{margin:0;font-size:clamp(24px,6vw,30px);font-weight:500;line-height:1.25;letter-spacing:.005em}
+.when-time{margin:8px 0 0;font-style:italic;font-size:18px;color:var(--ink-soft)}
+.venue{margin:0;font-size:clamp(26px,6.6vw,32px);font-weight:700;letter-spacing:.01em}
+.address{margin:6px 0 0;font-size:18px;color:var(--ink-soft)}
+.map-link{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  font-size:15px;font-style:italic;color:var(--brass-ink);text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:1px;
+}
+.map-link:hover{color:var(--ink)}
+.attire{margin:22px 0 0;font-size:17px;color:var(--ink)}
+.attire em{color:var(--brass-ink)}
+
+/* countdown */
+.countdown{
+  margin:34px auto 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  max-width:380px;border-top:.75px solid var(--brass);border-bottom:.75px solid var(--brass);
+  padding:14px 0;
+}
+.countdown div{display:flex;flex-direction:column;gap:2px}
+.countdown div + div{border-left:.75px solid rgba(201,164,92,.55)}
+.countdown b{font-size:30px;font-weight:500;font-variant-numeric:lining-nums tabular-nums;line-height:1.1}
+.countdown span{font-size:13px;font-style:italic;color:var(--ink-soft)}
+.count-caption{margin:10px 0 0;font-size:14px;font-style:italic;color:var(--ink-soft)}
+
+/* RSVP */
+.rsvp{margin-top:40px}
+.rsvp h2{margin:0 0 4px;font-family:var(--script);font-weight:400;font-size:44px;color:var(--brass-ink);line-height:1.2}
+.rsvp p.note{margin:0 0 20px;font-style:italic;font-size:16px;color:var(--ink-soft)}
+.btns{display:flex;flex-direction:column;gap:12px;max-width:340px;margin:0 auto}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  min-height:56px;padding:0 24px;border-radius:2px;cursor:pointer;text-decoration:none;
+  font-size:18px;letter-spacing:.03em;transition:background .2s ease,color .2s ease, transform .15s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-accept{
+  background:var(--velvet);color:var(--ivory);border:1px solid var(--velvet);
+  box-shadow:0 0 0 3px var(--ivory), 0 0 0 4px var(--brass);
+}
+.btn-accept:hover{background:#155141}
+.btn-decline{background:transparent;color:var(--ink);border:1px solid rgba(30,42,36,.35)}
+.btn-decline:hover{border-color:var(--ink)}
+.confirm{display:none;padding:18px 16px;border:.75px solid var(--brass);background:rgba(201,164,92,.08)}
+.confirm.on{display:block}
+.confirm p{margin:0}
+.confirm .big{font-size:22px;font-weight:500}
+.confirm .small{margin-top:6px;font-style:italic;font-size:15px;color:var(--ink-soft)}
+.linkish{background:none;border:0;padding:0;margin-top:10px;color:var(--brass-ink);font-style:italic;font-size:15px;cursor:pointer;border-bottom:1px solid currentColor}
+
+/* calendar */
+.cal{margin-top:36px;padding-top:26px;border-top:.75px solid rgba(201,164,92,.6)}
+.cal p{margin:0 0 14px;font-size:16px;font-style:italic;color:var(--ink-soft)}
+.cal-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cal-btn{
+  display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;
+  border:1px solid var(--brass);color:var(--ink);text-decoration:none;font-size:16px;background:rgba(255,255,255,.35);
+}
+.cal-btn:hover{background:var(--ivory-shade)}
+.cal-btn svg{width:18px;height:18px;color:var(--brass-ink)}
+
+.sign{margin:40px 0 0;font-family:var(--script);font-size:30px;color:var(--brass-ink)}
+
+.below{max-width:560px;margin:22px auto 0;text-align:center;font-style:italic;font-size:14px;color:var(--brass-light);opacity:.85}
+
+/* dialog */
+dialog{
+  border:0;padding:0;background:transparent;max-width:min(92vw,440px);width:100%;color:var(--ink);
+}
+dialog::backdrop{background:rgba(4,16,12,.72);backdrop-filter:blur(3px)}
+.sheet{background:var(--ivory);padding:30px 26px 26px;border:1.5px solid var(--brass);position:relative}
+.sheet::before{content:"";position:absolute;inset:5px;border:.75px solid var(--brass);pointer-events:none}
+.sheet h3{margin:0;font-family:var(--script);font-weight:400;font-size:40px;color:var(--brass-ink);text-align:center;line-height:1.2}
+.sheet .note{margin:4px 0 20px;text-align:center;font-style:italic;color:var(--ink-soft);font-size:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;text-align:left;position:relative}
+.field label{font-size:15px;font-style:italic;color:var(--ink-soft)}
+.field input,.field select{
+  min-height:50px;padding:0 14px;border:1px solid rgba(30,42,36,.35);background:#fffaf0;color:var(--ink);font-size:18px;border-radius:0;
+}
+.field input:focus,.field select:focus{outline:2px solid var(--brass);outline-offset:1px;border-color:var(--brass)}
+.sheet .btns{max-width:none}
+.sheet .err{color:var(--wax);font-size:15px;margin:-6px 0 12px;min-height:1em;text-align:left}
+.close-x{
+  position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;background:none;cursor:pointer;color:var(--ink-soft);z-index:1
+}
+
+/* confetti */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
+.confetti i{
+  position:absolute;top:-20px;width:8px;height:14px;
+  background:linear-gradient(135deg,var(--brass-light),var(--brass) 60%,#8a6a2b);
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translate3d(var(--dx),110vh,0) rotate(var(--rot))}
+}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ENVELOPE -->
+<section class="stage" id="stage" aria-label="Sealed invitation">
+  <p class="stage-kicker">Something arrived for you<b>with love, Papichulo</b></p>
+
+  <div class="envelope" id="envelope">
+    <div class="env-back"></div>
+    <div class="env-lining"></div>
+    <div class="peek" aria-hidden="true"><span>Papichulo</span><small>turns thirty</small></div>
+    <div class="env-front"></div>
+    <p class="env-address" aria-hidden="true">Saturday, December 12 · New York</p>
+    <div class="env-flap"></div>
+    <button class="seal" id="seal" aria-label="Break the seal and open the invitation">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <radialGradient id="wax" cx="38%" cy="32%" r="70%">
+            <stop offset="0" stop-color="#B8404F"/>
+            <stop offset=".55" stop-color="#7A1F2B"/>
+            <stop offset="1" stop-color="#4A0F18"/>
+          </radialGradient>
+        </defs>
+        <path fill="url(#wax)" d="M50 3c6 0 8 4 13 5s10-1 13 3 1 9 4 13 9 5 10 10-3 8-2 13 6 9 4 14-8 5-10 9-1 10-5 13-9 0-13 2-7 7-12 7-8-4-13-5-10 1-13-3-1-9-4-13-9-5-10-10 3-8 2-13-6-9-4-14 8-5 10-9 1-10 5-13 9 0 13-2 7-7 12-7z"/>
+        <circle cx="50" cy="50" r="31" fill="none" stroke="#4A0F18" stroke-width="2" opacity=".6"/>
+        <circle cx="50" cy="50" r="27" fill="none" stroke="#C9606E" stroke-width=".8" opacity=".55"/>
+        <text x="50" y="64" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="44" fill="#4A0F18" opacity=".75">P</text>
+        <text x="49.2" y="63" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="44" fill="#D26B79" opacity=".55">P</text>
+      </svg>
+    </button>
+  </div>
+
+  <p class="hint" id="hint">Tap the seal to open</p>
+</section>
+
+<!-- INVITATION -->
+<main class="invite-wrap" id="invite" aria-labelledby="inv-name">
+  <article class="card">
+    <div class="frame">
+      <svg class="corner tl" viewBox="0 0 58 58" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 54V4h50"/><path d="M10 54V10h44"/><path d="M16 30V16h14"/><path d="M4 4l12 12"/><circle cx="22" cy="22" r="2.2" fill="currentColor"/></g></svg>
+      <svg class="corner tr" viewBox="0 0 58 58" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 54V4h50"/><path d="M10 54V10h44"/><path d="M16 30V16h14"/><path d="M4 4l12 12"/><circle cx="22" cy="22" r="2.2" fill="currentColor"/></g></svg>
+      <svg class="corner bl" viewBox="0 0 58 58" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 54V4h50"/><path d="M10 54V10h44"/><path d="M16 30V16h14"/><path d="M4 4l12 12"/><circle cx="22" cy="22" r="2.2" fill="currentColor"/></g></svg>
+      <svg class="corner br" viewBox="0 0 58 58" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 54V4h50"/><path d="M10 54V10h44"/><path d="M16 30V16h14"/><path d="M4 4l12 12"/><circle cx="22" cy="22" r="2.2" fill="currentColor"/></g></svg>
+
+      <!-- crest: deco sunburst with 30 medallion -->
+      <svg class="crest" viewBox="0 0 180 110" role="img" aria-label="Thirty">
+        <g stroke="currentColor" stroke-width="1" fill="none">
+          <path d="M90 92 L10 92"/><path d="M90 92 L170 92"/>
+          <path d="M90 92 L20 52"/><path d="M90 92 L160 52"/>
+          <path d="M90 92 L38 26"/><path d="M90 92 L142 26"/>
+          <path d="M90 92 L62 10"/><path d="M90 92 L118 10"/>
+          <path d="M90 92 L90 4"/>
+          <path d="M90 92 L29 38" opacity=".55"/><path d="M90 92 L151 38" opacity=".55"/>
+          <path d="M90 92 L49 17" opacity=".55"/><path d="M90 92 L131 17" opacity=".55"/>
+          <path d="M90 92 L76 6" opacity=".55"/><path d="M90 92 L104 6" opacity=".55"/>
+          <path d="M14 92a76 76 0 0 1 152 0" opacity=".7"/>
+          <path d="M30 92a60 60 0 0 1 120 0" opacity=".45"/>
+        </g>
+        <circle cx="90" cy="78" r="30" fill="#F6EFE0" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="90" cy="78" r="25" fill="none" stroke="currentColor" stroke-width=".7"/>
+        <text x="90" y="90" text-anchor="middle" font-family="Bodoni Moda, Didot, serif" font-size="32" font-weight="500" fill="currentColor">30</text>
+        <path d="M60 106h60" stroke="currentColor" stroke-width="1"/>
+        <path d="M86 106l4-4 4 4-4 4z" fill="currentColor"/>
+      </svg>
+
+      <p class="lede">The pleasure of your company is requested<br>to celebrate the thirtieth birthday of</p>
+      <h1 class="name" id="inv-name">Papichulo</h1>
+      <p class="sub">An evening of drinks, dancing<br>and very good company</p>
+
+      <svg class="ornament" viewBox="0 0 150 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 9h56M94 9h56"/><path d="M75 1l8 8-8 8-8-8z"/><path d="M75 5l4 4-4 4-4-4z" fill="currentColor"/><circle cx="61" cy="9" r="1.6" fill="currentColor"/><circle cx="89" cy="9" r="1.6" fill="currentColor"/></g></svg>
+
+      <p class="when-date">Saturday, the twelfth of December</p>
+      <p class="when-time">Eight until eleven o’clock in the evening</p>
+
+      <svg class="ornament" viewBox="0 0 150 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 9h56M94 9h56"/><path d="M75 1l8 8-8 8-8-8z"/><path d="M75 5l4 4-4 4-4-4z" fill="currentColor"/><circle cx="61" cy="9" r="1.6" fill="currentColor"/><circle cx="89" cy="9" r="1.6" fill="currentColor"/></g></svg>
+
+      <p class="venue">The Ned NoMad</p>
+      <p class="address">1170 Broadway, New York</p>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=The%20Ned%20NoMad%2C%201170%20Broadway%2C%20New%20York%2C%20NY" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        Get directions
+      </a>
+      <p class="attire">Attire: <em>dress to impress</em></p>
+
+      <div class="countdown" id="countdown" aria-live="off">
+        <div><b id="cd-d">--</b><span>days</span></div>
+        <div><b id="cd-h">--</b><span>hours</span></div>
+        <div><b id="cd-m">--</b><span>minutes</span></div>
+        <div><b id="cd-s">--</b><span>seconds</span></div>
+      </div>
+      <p class="count-caption" id="cd-caption">until the doors open</p>
+
+      <section class="cal" aria-label="Add to your calendar">
+        <p>Save the date to your calendar</p>
+        <div class="cal-row">
+          <a class="cal-btn" target="_blank" rel="noopener"
+             href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Papichulo%E2%80%99s%2030th%20Birthday&amp;dates=20261212T200000/20261212T230000&amp;ctz=America/New_York&amp;location=The%20Ned%20NoMad%2C%201170%20Broadway%2C%20New%20York%2C%20NY&amp;details=Papichulo%20turns%2030.%20Attire%3A%20dress%20to%20impress.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            Google Calendar
+          </a>
+          <a class="cal-btn" target="_blank" rel="noopener"
+             href="https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&amp;rru=addevent&amp;subject=Papichulo%E2%80%99s%2030th%20Birthday&amp;startdt=2026-12-12T20%3A00%3A00-05%3A00&amp;enddt=2026-12-12T23%3A00%3A00-05%3A00&amp;location=The%20Ned%20NoMad%2C%201170%20Broadway%2C%20New%20York%2C%20NY&amp;body=Papichulo%20turns%2030.%20Attire%3A%20dress%20to%20impress.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            Outlook
+          </a>
+          <a class="cal-btn" target="_blank" rel="noopener"
+             href="https://calndr.link/d/event/?service=apple&amp;start=2026-12-12%2020%3A00&amp;end=2026-12-12%2023%3A00&amp;timezone=America%2FNew_York&amp;title=Papichulo%E2%80%99s%2030th%20Birthday&amp;location=The%20Ned%20NoMad%2C%201170%20Broadway%2C%20New%20York%2C%20NY&amp;description=Papichulo%20turns%2030.%20Attire%3A%20dress%20to%20impress.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            Apple Calendar
+          </a>
+        </div>
+      </section>
+
+      <p class="sign">See you there</p>
+    </div>
+  </article>
+  <p class="below">December 12, 2026 · The Ned NoMad, New York</p>
+</main>
+
+<!-- RSVP dialog -->
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <form class="sheet" id="dlg-form" method="dialog">
+    <button class="close-x" type="button" id="dlg-close" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h3 id="dlg-title">RSVP</h3>
+    <p class="note" id="dlg-note">We can’t wait to celebrate with you</p>
+    <div class="field">
+      <label for="guest-name">Your name</label>
+      <input id="guest-name" name="guest-name" autocomplete="name" maxlength="60">
+    </div>
+    <div class="field" id="plus-field">
+      <label for="plus">Who’s coming</label>
+      <select id="plus" name="plus">
+        <option value="solo">Just me</option>
+        <option value="plus1">Me plus one</option>
+      </select>
+    </div>
+    <p class="err" id="err" aria-live="polite"></p>
+    <div class="btns">
+      <a class="btn btn-accept" id="send" href="#" target="_blank" rel="noopener">Text my reply</a>
+    </div>
+  </form>
+</dialog>
+
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<script>
+(function(){
+  // ===== Host settings =====
+  var HOST_PHONE = "+19295491009";           // e.g. "+12125551234" — RSVPs open a text to this number
+  var PARTY_START = new Date("2026-12-12T20:00:00-05:00");
+  var PARTY_END   = new Date("2026-12-12T23:00:00-05:00");
+  var STORE_KEY = "papichulo30-rsvp";
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var stage = document.getElementById("stage");
+  var env = document.getElementById("envelope");
+  var invite = document.getElementById("invite");
+  var seal = document.getElementById("seal");
+  var opened = false;
+
+  function store(get, val){
+    try{
+      if(get) return JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+      if(val === null) localStorage.removeItem(STORE_KEY);
+      else localStorage.setItem(STORE_KEY, JSON.stringify(val));
+    }catch(e){ return null; }
+  }
+
+  function reveal(){
+    stage.classList.add("gone");
+    setTimeout(function(){
+      stage.style.display = "none";
+      invite.classList.add("shown");
+      window.scrollTo(0,0);
+    }, reduce ? 0 : 550);
+  }
+
+  function openEnvelope(){
+    if(opened) return; opened = true;
+    document.getElementById("hint").textContent = "";
+    if(reduce){ reveal(); return; }
+    env.classList.add("opening");
+    setTimeout(function(){ env.classList.add("flap-open"); }, 300);
+    setTimeout(function(){ env.classList.add("card-out"); }, 1050);
+    setTimeout(reveal, 2100);
+  }
+  seal.addEventListener("click", openEnvelope);
+  env.addEventListener("click", function(e){ if(e.target !== seal && !seal.contains(e.target)) openEnvelope(); });
+
+  // Returning guests skip straight to the card
+  if(location.hash === "#card" || store(true)){
+    opened = true; stage.style.display = "none"; invite.classList.add("shown");
+  }
+
+  // ===== Countdown =====
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function tick(){
+    var now = new Date();
+    var ms = PARTY_START - now;
+    var cap = document.getElementById("cd-caption");
+    if(ms <= 0){
+      ["d","h","m","s"].forEach(function(k){ document.getElementById("cd-"+k).textContent = "00"; });
+      cap.textContent = now < PARTY_END ? "The party is on right now" : "Thank you for celebrating";
+      return;
+    }
+    var s = Math.floor(ms/1000);
+    document.getElementById("cd-d").textContent = Math.floor(s/86400);
+    document.getElementById("cd-h").textContent = pad(Math.floor(s%86400/3600));
+    document.getElementById("cd-m").textContent = pad(Math.floor(s%3600/60));
+    document.getElementById("cd-s").textContent = pad(s%60);
+  }
+  tick(); setInterval(tick, 1000);
+
+  // ===== RSVP (section removed; kept disabled) =====
+  if(false){
+  var dlg = document.getElementById("dlg");
+  var nameIn = document.getElementById("guest-name");
+  var plus = document.getElementById("plus");
+  var send = document.getElementById("send");
+  var err = document.getElementById("err");
+  var mode = "yes";
+
+  function message(){
+    var n = nameIn.value.trim();
+    if(mode === "yes"){
+      return "Hey Papichulo! " + n + " here — I’ll be at your 30th on Dec 12 at The Ned NoMad" +
+        (plus.value === "plus1" ? " and I’m bringing a plus-one." : ".") + " See you there!";
+    }
+    return "Hey Papichulo, " + n + " here. I’m so sorry I can’t make your 30th on Dec 12. Have the best night!";
+  }
+  function updateLink(){
+    var body = encodeURIComponent(message());
+    send.href = HOST_PHONE ? ("sms:" + HOST_PHONE + "?&body=" + body) : "#";
+  }
+  function openDlg(m){
+    mode = m;
+    document.getElementById("dlg-title").textContent = "RSVP";
+    document.getElementById("dlg-note").textContent = m === "yes" ? "We can’t wait to celebrate with you" : "You’ll be missed. Send your regards";
+    document.getElementById("plus-field").style.display = m === "yes" ? "" : "none";
+    send.textContent = "Text my RSVP";
+    err.textContent = "";
+    var saved = store(true);
+    if(saved && saved.name && !nameIn.value) nameIn.value = saved.name;
+    updateLink();
+    if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open","");
+    setTimeout(function(){ nameIn.focus(); }, 50);
+  }
+  function closeDlg(){ if(dlg.close) dlg.close(); else dlg.removeAttribute("open"); }
+
+  document.getElementById("btn-yes").addEventListener("click", function(){ openDlg("yes"); });
+  document.getElementById("dlg-close").addEventListener("click", closeDlg);
+  nameIn.addEventListener("input", updateLink);
+  plus.addEventListener("change", updateLink);
+  document.getElementById("dlg-form").addEventListener("submit", function(e){ e.preventDefault(); send.click(); });
+
+  send.addEventListener("click", function(e){
+    var n = nameIn.value.trim();
+    if(!n){ e.preventDefault(); err.textContent = "Add your name so Papichulo knows who’s replying."; nameIn.focus(); return; }
+    if(!HOST_PHONE){ e.preventDefault(); }
+    var rec = { reply: mode, name: n, plus: mode === "yes" ? plus.value : "solo" };
+    store(false, rec);
+    closeDlg();
+    showConfirm(rec);
+    if(mode === "yes") confetti();
+  });
+
+  function showConfirm(rec){
+    document.getElementById("rsvp-btns").style.display = "none";
+    var c = document.getElementById("confirm");
+    c.classList.add("on");
+    var first = rec.name.split(" ")[0];
+    if(rec.reply === "yes"){
+      document.getElementById("confirm-big").textContent = "You’re on the list, " + first + ".";
+      document.getElementById("confirm-small").textContent = rec.plus === "plus1" ? "Party of two. Save the date below so you don’t forget." : "Save the date below so you don’t forget.";
+    } else {
+      document.getElementById("confirm-big").textContent = "You’ll be missed, " + first + ".";
+      document.getElementById("confirm-small").textContent = "Your regrets have been noted.";
+    }
+  }
+  document.getElementById("change").addEventListener("click", function(){
+    store(false, null);
+    document.getElementById("confirm").classList.remove("on");
+    document.getElementById("rsvp-btns").style.display = "";
+  });
+  var saved = store(true);
+  if(saved && saved.name) showConfirm(saved);
+
+  }
+  // ===== Gold confetti =====
+  function confetti(){
+    if(reduce) return;
+    var box = document.getElementById("confetti");
+    for(var i=0;i<70;i++){
+      var p = document.createElement("i");
+      p.style.left = (Math.random()*100) + "vw";
+      p.style.setProperty("--dx", ((Math.random()-.5)*200) + "px");
+      p.style.setProperty("--rot", (Math.random()*1080 - 540) + "deg");
+      p.style.animationDuration = (2.2 + Math.random()*2) + "s";
+      p.style.animationDelay = (Math.random()*.5) + "s";
+      var w = 5 + Math.random()*7;
+      p.style.width = w + "px"; p.style.height = (w*1.7) + "px";
+      box.appendChild(p);
+    }
+    setTimeout(function(){ box.innerHTML = ""; }, 5000);
+  }
+})();
+</script>
+</body>
+</html>
